@@ -120,12 +120,10 @@ d3.json("samples.json").then((data) =>{
                 li.text(`${key}: ${value}`)
             });
         });
-      }
-    d3.selectAll("#selDataset").on("change", getData)
-    
-    
+    };
 
-    console.log(metadata.filter(d => d.id===940))
+    d3.selectAll("#selDataset").on("change", getData)
+
     function getData() {
         var dropdownMenu = d3.select("select");
         // Assign the value of the dropdown menu option to a variable
@@ -144,7 +142,7 @@ d3.json("samples.json").then((data) =>{
         d3.selectAll("ul").remove()
         d3.selectAll("li").remove()
         var info = metadata.filter(d => d.id === +option);
-        console.log(info)
+  
         info.forEach( sample =>{
             var ul = infoTable.append("ul")
             
@@ -152,12 +150,12 @@ d3.json("samples.json").then((data) =>{
                 var li=ul.append("li")
                 li.text(`${key}: ${value}`)
             });
-          });
+        });
 
         
-      };
+    };
 
-      function updatePlotly(newdata, fullnewdata) {
+    function updatePlotly(newdata, fullnewdata) {
         var labels = newdata.map(d =>d.otu_id)
         var l = labels.map(d =>{
             return d = "OTU " + d.toString(); 
@@ -170,7 +168,7 @@ d3.json("samples.json").then((data) =>{
             type: "bar"
         }
         Plotly.update("bar", updateBar);
-      
+        
         var updateBubble = {
             x: [fullnewdata.map(d =>d.otu_id).reverse()],
             y: [fullnewdata.map(d =>d.sampVal).reverse()],
@@ -183,10 +181,9 @@ d3.json("samples.json").then((data) =>{
         }
         Plotly.update("bubble", updateBubble);
 
-      }
+    };
 
     
-    console.log(dataObjs);
-    // console.log(subjectIDs);
+
     init();
 });
